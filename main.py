@@ -33,6 +33,40 @@ def tie():
     cs2.config(text ="Computer Score : " +str(computer_score))
     ys2.config(text = "Your score : " + str(player_score))
   
+def player_choice(player_input):
+    global player_score, computer_score 
+    computer_input= computer_choice()
+    ys.config(text = "You selected:" + player_input[0])
+    cs.config(text = "Computer selected:"+ computer_input[0])
+
+    print(player_input)
+    print(computer_input)
+
+    if player_input == computer_input :
+        tie()
+    
+    if (player_input[1] == 0):
+        if(computer_input[1]==1):
+            cw()
+        elif(computer_input[1]==2):
+            yw()
+    
+    if (player_input[1] ==1):
+        if(computer_input[1] == 0):
+            yw()
+        elif(computer_input[1]==2):
+            cw()
+
+    if(player_input[1] == 2):
+        if(computer_input[1]==0):
+            cw()
+        if(computer_input[1]==1):
+            yw()
+
+
+def computer_choice():
+    return random.choice(options)
+
 
 title = Label(text= "Rock Paper Scissors",font =font.Font(size = 20), fg="grey")
 title.pack()
@@ -46,13 +80,13 @@ frame.pack()
 yo = Label(frame, text = "Your Options : ", font = font.Font(size = 10), fg = "grey")
 yo.grid(row = 0, column= 0, pady = 8)
 
-r = Button(frame, text = "Rock", font = font.Font (size = 10),fg ="black",bg = "red")
+r = Button(frame, text = "Rock", font = font.Font (size = 10),fg ="black",bg = "red", command = lambda : player_choice(options[0]))
 r.grid(row =1 , column = 1, padx= 8, pady=5)
 
-p = Button(frame, text = "Paper", font = font.Font (size = 10),fg ="black",bg = "grey")
+p = Button(frame, text = "Paper", font = font.Font (size = 10),fg ="black",bg = "grey", command= lambda : player_choice(options[1]))
 p.grid(row =1 , column = 2, padx= 8, pady=5)
 
-s = Button(frame, text = "Scissors", font = font.Font (size = 10),fg ="black",bg = "blue")
+s = Button(frame, text = "Scissors", font = font.Font (size = 10),fg ="black",bg = "blue", command= lambda : player_choice(options[2]))
 s.grid(row =1 , column = 3, padx= 8, pady=5)
 
 sc = Label(frame, text="Score", font = font.Font(size = 10), fg= "grey")
